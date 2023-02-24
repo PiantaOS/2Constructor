@@ -156,7 +156,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(242, 663);
+            this.ClientSize = new System.Drawing.Size(153, 663);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -168,8 +168,8 @@
             this.Controls.Add(this.checkedListBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.MaximumSize = new System.Drawing.Size(258, 702);
-            this.MinimumSize = new System.Drawing.Size(258, 702);
+            this.MaximumSize = new System.Drawing.Size(169, 702);
+            this.MinimumSize = new System.Drawing.Size(169, 702);
             this.Name = "Form1";
             this.Text = "2Constructor";
             this.Load += new System.EventHandler(this.Form1_Load);
