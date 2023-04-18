@@ -12,11 +12,11 @@ namespace _2Constructor
 
         private List<Card> cards = new List<Card>();
 
-        //private int cardAmount = 0;
-
         private Word.Document oDoc1;
         private Word.Document oDoc2;
         private int labelNum = 0;
+
+        private int accuracy = 2;
 
         public Form1()
         {
@@ -27,7 +27,6 @@ namespace _2Constructor
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             //Opens the file dialog
 
             headFontSize = Convert.ToInt32(numericUpDown1.Value);
@@ -70,7 +69,6 @@ namespace _2Constructor
             saveFileDialog1.Filter = "Word Document|*.docx";
             saveFileDialog1.ShowDialog();
             oDoc1.SaveAs2(saveFileDialog1.FileName);
-            //oDoc1.Close();
             oDoc2.Close();
         }
 
@@ -95,6 +93,8 @@ namespace _2Constructor
 
                     labelNum++;
                     label4.Text = labelNum.ToString();
+
+                    i += accuracy;
                 }
             }
             oDoc1 = oWord.Documents.Add();
@@ -143,5 +143,7 @@ namespace _2Constructor
     {
         public int position { get; set; }
         public Word.Range range { get; set; }
+
+
     }
 }
