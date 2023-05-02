@@ -8,15 +8,14 @@ namespace _2Constructor
 {
     public partial class Form1 : Form
     {
-        private int headFontSize;
+        private int _headFontSize;
 
-        private List<Card> cards = new List<Card>();
+        private readonly List<Card> _cards = new List<Card>();
+        
 
-        //private int cardAmount = 0;
-
-        private Word.Document oDoc1;
-        private Word.Document oDoc2;
-        private int labelNum = 0;
+        private Word.Document _oDoc1;
+        private Word.Document _oDoc2;
+        private int _labelNum = 0;
 
         public Form1()
         {
@@ -30,48 +29,43 @@ namespace _2Constructor
 
             //Opens the file dialog
 
-            headFontSize = Convert.ToInt32(numericUpDown1.Value);
+            _headFontSize = Convert.ToInt32(numericUpDown1.Value);
 
             DialogResult result = openFileDialog1.ShowDialog();
-            if (result == DialogResult.OK)
+            if (result != DialogResult.OK) return;
+            foreach (String file in openFileDialog1.FileNames)
             {
-                foreach (String file in openFileDialog1.FileNames)
-                {
-                    label2.Text = Path.GetFileName(file);
-                }
+                label2.Text = Path.GetFileName(file);
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Iterates over selected cards and copies content into word document
+            //Iterates over selected _cards and copies content into word document
 
-            int count = oDoc2.Sentences.Count;
+            int count = _oDoc2.Sentences.Count;
 
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
-                if (checkedListBox1.GetItemChecked(i))
+                if (!checkedListBox1.GetItemChecked(i)) continue;
+                int pos = _cards[i].position;
+                int iterate = 1;
+
+                while (Convert.ToInt32(_oDoc2.Sentences[pos + iterate].Font.Size) != _headFontSize && pos + iterate + 1 < count)
                 {
-                    int pos = cards[i].position;
-                    int iterate = 1;
-
-                    while (oDoc2.Sentences[pos + iterate].Font.Size != headFontSize && pos + iterate + 1 < count)
-                    {
-                        iterate++;
-                    }
-                    object startLocation = oDoc2.Sentences[pos].Start;
-                    object endLocation = oDoc2.Sentences[(pos + iterate) - 1].End;
-                    cards[i].range = oDoc2.Range(ref startLocation, ref endLocation);
-
-                    cards[i].range.Copy();
-                    oDoc1.Range(oDoc1.Content.End - 1, oDoc1.Content.End - 1).Paste();
+                    iterate++;
                 }
+                object startLocation = _oDoc2.Sentences[pos].Start;
+                object endLocation = _oDoc2.Sentences[(pos + iterate) - 1].End;
+                _cards[i].range = _oDoc2.Range(ref startLocation, ref endLocation);
+
+                _cards[i].range.Copy();
+                _oDoc1.Range(_oDoc1.Content.End - 1, _oDoc1.Content.End - 1).Paste();
             }
             saveFileDialog1.Filter = "Word Document|*.docx";
             saveFileDialog1.ShowDialog();
-            oDoc1.SaveAs2(saveFileDialog1.FileName);
-            //oDoc1.Close();
-            oDoc2.Close();
+            _oDoc1.SaveAs2(saveFileDialog1.FileName);
+            _oDoc2.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -80,24 +74,23 @@ namespace _2Constructor
             //Iterates over text in document and finds headers with the right font size
 
             Word.Application oWord = new Word.Application();
-            oDoc2 = oWord.Documents.Open(openFileDialog1.FileName, null, true);
-            int count = oDoc2.Sentences.Count;
+            _oDoc2 = oWord.Documents.Open(openFileDialog1.FileName, null, true);
+            int count = _oDoc2.Sentences.Count;
 
             for (int i = 1; i <= count; i++)
             {
-                if (oDoc2.Sentences[i].Font.Size == headFontSize)
+                if (Convert.ToInt32(_oDoc2.Sentences[i].Font.Size) == _headFontSize)
                 {
                     Card cd = new Card();
                     cd.position = i;
-                    cards.Add(cd);
+                    _cards.Add(cd);
 
-                    checkedListBox1.Items.Add(oDoc2.Sentences[i].Text);
-
-                    labelNum++;
-                    label4.Text = labelNum.ToString();
+                    checkedListBox1.Items.Add(_oDoc2.Sentences[i].Text);
+                    _labelNum++;
+                    label4.Text = _labelNum.ToString();
                 }
             }
-            oDoc1 = oWord.Documents.Add();
+            _oDoc1 = oWord.Documents.Add();
             oWord.Visible = true;
         }
 
@@ -126,8 +119,8 @@ namespace _2Constructor
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            headFontSize = Convert.ToInt32(numericUpDown1.Value);
+        { 
+            _headFontSize = Convert.ToInt32(numericUpDown1.Value);
         }
 
         private void label5_Click(object sender, EventArgs e)
