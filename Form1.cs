@@ -17,6 +17,8 @@ namespace _2Constructor
         private Word.Document _oDoc2;
         private int _labelNum = 0;
 
+        private int accuracy = 2;
+
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +28,6 @@ namespace _2Constructor
 
         private void button2_Click(object sender, EventArgs e)
         {
-
             //Opens the file dialog
 
             _headFontSize = Convert.ToInt32(numericUpDown1.Value);
@@ -85,9 +86,10 @@ namespace _2Constructor
                     cd.position = i;
                     _cards.Add(cd);
 
-                    checkedListBox1.Items.Add(_oDoc2.Sentences[i].Text);
-                    _labelNum++;
-                    label4.Text = _labelNum.ToString();
+                    labelNum++;
+                    label4.Text = labelNum.ToString();
+
+                    i += accuracy;
                 }
             }
             _oDoc1 = oWord.Documents.Add();
@@ -136,5 +138,7 @@ namespace _2Constructor
     {
         public int position { get; set; }
         public Word.Range range { get; set; }
+
+
     }
 }
