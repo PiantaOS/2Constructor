@@ -26,172 +26,168 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.CardList = new System.Windows.Forms.CheckedListBox();
+            this.HeadFontSizeLabel = new System.Windows.Forms.Label();
+            this.FileBrowser = new System.Windows.Forms.OpenFileDialog();
+            this.GenerateButton = new System.Windows.Forms.Button();
+            this.BrowseButton = new System.Windows.Forms.Button();
+            this.FileSelectedLabel = new System.Windows.Forms.Label();
+            this.FileSaver = new System.Windows.Forms.SaveFileDialog();
+            this.LoadCardsButton = new System.Windows.Forms.Button();
+            this.CardsLoaded = new System.Windows.Forms.Label();
+            this.CardAmountLabel = new System.Windows.Forms.Label();
+            this.FontSizeSelector = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.FontSizeSelector)).BeginInit();
             this.SuspendLayout();
             // 
-            // checkedListBox1
+            // CardList
             // 
-            this.checkedListBox1.CheckOnClick = true;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(9, 115);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(136, 499);
-            this.checkedListBox1.TabIndex = 0;
-            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
+            this.CardList.CheckOnClick = true;
+            this.CardList.FormattingEnabled = true;
+            this.CardList.Location = new System.Drawing.Point(9, 115);
+            this.CardList.Margin = new System.Windows.Forms.Padding(2);
+            this.CardList.Name = "CardList";
+            this.CardList.Size = new System.Drawing.Size(136, 484);
+            this.CardList.TabIndex = 0;
+            this.CardList.SelectedIndexChanged += new System.EventHandler(this.CardList_SelectedIndexChanged);
             // 
-            // label1
+            // HeadFontSizeLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 53);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Card Head Font Size";
+            this.HeadFontSizeLabel.AutoSize = true;
+            this.HeadFontSizeLabel.Location = new System.Drawing.Point(7, 53);
+            this.HeadFontSizeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.HeadFontSizeLabel.Name = "HeadFontSizeLabel";
+            this.HeadFontSizeLabel.Size = new System.Drawing.Size(120, 15);
+            this.HeadFontSizeLabel.TabIndex = 2;
+            this.HeadFontSizeLabel.Text = "Card Head Font Size";
             // 
-            // openFileDialog1
+            // FileBrowser
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            this.FileBrowser.FileName = "FileSelector";
+            this.FileBrowser.FileOk += new System.ComponentModel.CancelEventHandler(this.FileBrowser_FileOk);
             // 
-            // button1
+            // GenerateButton
             // 
-            this.button1.Location = new System.Drawing.Point(9, 620);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(136, 19);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Generate";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.GenerateButton.Location = new System.Drawing.Point(9, 620);
+            this.GenerateButton.Margin = new System.Windows.Forms.Padding(2);
+            this.GenerateButton.Name = "GenerateButton";
+            this.GenerateButton.Size = new System.Drawing.Size(136, 19);
+            this.GenerateButton.TabIndex = 3;
+            this.GenerateButton.Text = "Generate";
+            this.GenerateButton.UseVisualStyleBackColor = true;
+            this.GenerateButton.Click += new System.EventHandler(this.GenerateButton_Click);
             // 
-            // button2
+            // BrowseButton
             // 
-            this.button2.Location = new System.Drawing.Point(9, 26);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(136, 19);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Browse";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.BrowseButton.Location = new System.Drawing.Point(9, 26);
+            this.BrowseButton.Margin = new System.Windows.Forms.Padding(2);
+            this.BrowseButton.Name = "BrowseButton";
+            this.BrowseButton.Size = new System.Drawing.Size(136, 19);
+            this.BrowseButton.TabIndex = 4;
+            this.BrowseButton.Text = "Browse";
+            this.BrowseButton.UseVisualStyleBackColor = true;
+            this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
-            // label2
+            // FileSelectedLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 11);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "No File Selected";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.FileSelectedLabel.AutoSize = true;
+            this.FileSelectedLabel.Location = new System.Drawing.Point(7, 11);
+            this.FileSelectedLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.FileSelectedLabel.Name = "FileSelectedLabel";
+            this.FileSelectedLabel.Size = new System.Drawing.Size(97, 15);
+            this.FileSelectedLabel.TabIndex = 5;
+            this.FileSelectedLabel.Text = "No File Selected";
+            this.FileSelectedLabel.Click += new System.EventHandler(this.FileSelectedLabel_Click);
             // 
-            // saveFileDialog1
+            // FileSaver
             // 
-            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            this.FileSaver.FileOk += new System.ComponentModel.CancelEventHandler(this.FileSaver_FileOk);
             // 
-            // button3
+            // LoadCardsButton
             // 
-            this.button3.Location = new System.Drawing.Point(9, 91);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(136, 19);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Confirm";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.LoadCardsButton.Location = new System.Drawing.Point(9, 91);
+            this.LoadCardsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.LoadCardsButton.Name = "LoadCardsButton";
+            this.LoadCardsButton.Size = new System.Drawing.Size(136, 19);
+            this.LoadCardsButton.TabIndex = 8;
+            this.LoadCardsButton.Text = "Confirm";
+            this.LoadCardsButton.UseVisualStyleBackColor = true;
+            this.LoadCardsButton.Click += new System.EventHandler(this.LoadCardsButton_Click);
             // 
-            // label3
+            // CardsLoaded
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 641);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Cards Loaded:";
+            this.CardsLoaded.AutoSize = true;
+            this.CardsLoaded.Location = new System.Drawing.Point(9, 641);
+            this.CardsLoaded.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.CardsLoaded.Name = "CardsLoaded";
+            this.CardsLoaded.Size = new System.Drawing.Size(87, 15);
+            this.CardsLoaded.TabIndex = 9;
+            this.CardsLoaded.Text = "Cards Loaded:";
             // 
-            // label4
+            // CardAmountLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(86, 641);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(13, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "0";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.CardAmountLabel.AutoSize = true;
+            this.CardAmountLabel.Location = new System.Drawing.Point(86, 641);
+            this.CardAmountLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.CardAmountLabel.Name = "CardAmountLabel";
+            this.CardAmountLabel.Size = new System.Drawing.Size(14, 15);
+            this.CardAmountLabel.TabIndex = 10;
+            this.CardAmountLabel.Text = "0";
+            this.CardAmountLabel.Click += new System.EventHandler(this.label4_Click);
             // 
-            // numericUpDown1
+            // FontSizeSelector
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(9, 68);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(136, 20);
-            this.numericUpDown1.TabIndex = 11;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.FontSizeSelector.Location = new System.Drawing.Point(9, 68);
+            this.FontSizeSelector.Margin = new System.Windows.Forms.Padding(2);
+            this.FontSizeSelector.Name = "FontSizeSelector";
+            this.FontSizeSelector.Size = new System.Drawing.Size(136, 20);
+            this.FontSizeSelector.TabIndex = 11;
+            this.FontSizeSelector.Value = new decimal(new int[] { 16, 0, 0, 0 });
+            this.FontSizeSelector.ValueChanged += new System.EventHandler(this.FontSizeSelector_ValueChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(153, 663);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.checkedListBox1);
+            this.ClientSize = new System.Drawing.Size(151, 655);
+            this.Controls.Add(this.FontSizeSelector);
+            this.Controls.Add(this.CardAmountLabel);
+            this.Controls.Add(this.CardsLoaded);
+            this.Controls.Add(this.LoadCardsButton);
+            this.Controls.Add(this.FileSelectedLabel);
+            this.Controls.Add(this.BrowseButton);
+            this.Controls.Add(this.GenerateButton);
+            this.Controls.Add(this.HeadFontSizeLabel);
+            this.Controls.Add(this.CardList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximumSize = new System.Drawing.Size(169, 702);
             this.MinimumSize = new System.Drawing.Size(169, 702);
             this.Name = "Form1";
             this.Text = "2Constructor";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FontSizeSelector)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.SaveFileDialog FileSaver;
 
         #endregion
 
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.CheckedListBox CardList;
+        private System.Windows.Forms.Label HeadFontSizeLabel;
+        private System.Windows.Forms.OpenFileDialog FileBrowser;
+        private System.Windows.Forms.Button GenerateButton;
+        private System.Windows.Forms.Button BrowseButton;
+        private System.Windows.Forms.Label FileSelectedLabel;
+        private System.Windows.Forms.SaveFileDialog SaveFile;
+        private System.Windows.Forms.Button LoadCardsButton;
+        private System.Windows.Forms.Label CardsLoaded;
+        private System.Windows.Forms.Label CardAmountLabel;
+        private System.Windows.Forms.NumericUpDown FontSizeSelector;
     }
 }
 
