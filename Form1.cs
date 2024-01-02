@@ -82,6 +82,7 @@ namespace _2Constructor
             }
             _finalDocument = wordApplication.Documents.Add();
             wordApplication.Visible = true; //Making this false might be better
+
         }
         public void CreateDocument() {
             int sentencesAmount = _originalDocument.Sentences.Count;
@@ -95,6 +96,7 @@ namespace _2Constructor
 
                 int currentPosition = sentenceIndex + positionInCard;
                 int nextPosition = currentPosition + 1;
+=======
 
                 int currentSentenceFontSize = Convert.ToInt32(_originalDocument.Sentences[currentPosition].Font.Size);
 
