@@ -6,109 +6,157 @@ using Word = Microsoft.Office.Interop.Word;
 
 namespace _2Constructor
 {
+    
+    
+    
+    
+    //Move functions from form1 to processor
     public partial class Form1 : Form
     {
-        private int _headFontSize;
+        private int _headerFontSize;
 
         private readonly List<Card> _cards = new List<Card>();
+
+        private Word.Document _originalDocument;
+        private Word.Document _finalDocument;
         
+        private int _amountCardsLoaded = 0;
 
-        private Word.Document _oDoc1;
-        private Word.Document _oDoc2;
-        private int _labelNum = 0;
+        private readonly int _linesToSkip = 2;
 
-        private int accuracy = 2;
+
+        
+        
 
         public Form1()
         {
             InitializeComponent();
 
-            this.openFileDialog1.Multiselect = true;
+            this.FileBrowser.Multiselect = true;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void BrowseButton_Click(object sender, EventArgs e)
         {
-            //Opens the file dialog
+            GetFiles();
+        }
+        
+        private void GenerateButton_Click(object sender, EventArgs e)
+        {
+            CreateDocument();
+        }
 
-            _headFontSize = Convert.ToInt32(numericUpDown1.Value);
+        
+        private void LoadCardsButton_Click(object sender, EventArgs e)
+        {
+            LocateHeaders();
+        }
 
-            DialogResult result = openFileDialog1.ShowDialog();
-            if (result != DialogResult.OK) return;
-            foreach (String file in openFileDialog1.FileNames)
+        
+        private void FontSizeSelector_ValueChanged(object sender, EventArgs e)
+        { 
+            UpdateHeaderFontSize(Convert.ToInt32(FontSizeSelector.Value));
+        }
+        
+        public void LocateHeaders() {
+            
+            Word.Application wordApplication = new Word.Application();
+            
+            _originalDocument = wordApplication.Documents.Open(FileBrowser.FileName, null, true); //openfile diaglog file name into var please
+            
+            int sentenceCount = _originalDocument.Sentences.Count;
+
+            for (int i = 1; i <= sentenceCount; i++)
             {
-                label2.Text = Path.GetFileName(file);
+                if(Convert.ToInt32(_originalDocument.Sentences[i].Font.Size) != _headerFontSize) { continue; } //Problem here
+                
+                Card card = new Card();
+                card.position = i;
+                _cards.Add(card);
+
+                _amountCardsLoaded++;
+                CardsLoaded.Text = _amountCardsLoaded.ToString();
+                i += _linesToSkip; //var name indescriptive
+                
+                CardList.Items.Add(_originalDocument.Sentences[i].Text);
+                
             }
+            _finalDocument = wordApplication.Documents.Add();
+            wordApplication.Visible = true; //Making this false might be better
+
         }
+        public void CreateDocument() {
+            int sentencesAmount = _originalDocument.Sentences.Count;
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Iterates over selected _cards and copies content into word document
-
-            int count = _oDoc2.Sentences.Count;
-
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            for (int i = 0; i < CardList.Items.Count; i++)
             {
-                if (!checkedListBox1.GetItemChecked(i)) continue;
-                int pos = _cards[i].position;
-                int iterate = 1;
+                if (CardList.GetItemChecked(i) == false) continue;
+                
+                int sentenceIndex = _cards[i].position;
+                int positionInCard = 1;
 
-                while (Convert.ToInt32(_oDoc2.Sentences[pos + iterate].Font.Size) != _headFontSize && pos + iterate + 1 < count)
+                int currentPosition = sentenceIndex + positionInCard;
+                int nextPosition = currentPosition + 1;
+=======
+
+                int currentSentenceFontSize = Convert.ToInt32(_originalDocument.Sentences[currentPosition].Font.Size);
+
+                while (currentSentenceFontSize != _headerFontSize && nextPosition < sentencesAmount)
                 {
-                    iterate++;
+                    positionInCard++;
                 }
-                object startLocation = _oDoc2.Sentences[pos].Start;
-                object endLocation = _oDoc2.Sentences[(pos + iterate) - 1].End;
-                _cards[i].range = _oDoc2.Range(ref startLocation, ref endLocation);
-
+                
+                object startLocation = _originalDocument.Sentences[sentenceIndex].Start;
+                object endLocation = _originalDocument.Sentences[nextPosition - 1].End;
+                
+                _cards[i].range = _originalDocument.Range(ref startLocation, ref endLocation);
                 _cards[i].range.Copy();
-                _oDoc1.Range(_oDoc1.Content.End - 1, _oDoc1.Content.End - 1).Paste();
+                
+                _finalDocument.Range(_finalDocument.Content.End - 1, _finalDocument.Content.End - 1).Paste();
             }
-            saveFileDialog1.Filter = "Word Document|*.docx";
-            saveFileDialog1.ShowDialog();
-            _oDoc1.SaveAs2(saveFileDialog1.FileName);
-            _oDoc2.Close();
+            
+            SaveFile.Filter = "Word Document|*.docx";
+            SaveFile.ShowDialog();
+            
+            _finalDocument.SaveAs2(SaveFile.FileName);
+            _originalDocument.Close();
         }
+        public void UpdateHeaderFontSize(int newSize) {
+            _headerFontSize = newSize;
+        }
+        private void GetFiles() {
+            _headerFontSize = Convert.ToInt32(FontSizeSelector.Value);
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-            //Iterates over text in document and finds headers with the right font size
-
-            Word.Application oWord = new Word.Application();
-            _oDoc2 = oWord.Documents.Open(openFileDialog1.FileName, null, true);
-            int count = _oDoc2.Sentences.Count;
-
-            for (int i = 1; i <= count; i++)
+            DialogResult result = FileBrowser.ShowDialog();
+            
+            if (result != DialogResult.OK) return;
+            
+            foreach (String file in FileBrowser.FileNames)
             {
-                if (Convert.ToInt32(_oDoc2.Sentences[i].Font.Size) == _headFontSize)
-                {
-                    Card cd = new Card();
-                    cd.position = i;
-                    _cards.Add(cd);
-
-                    labelNum++;
-                    label4.Text = labelNum.ToString();
-
-                    i += accuracy;
-                }
+                FileSelectedLabel.Text = Path.GetFileName(file);
             }
-            _oDoc1 = oWord.Documents.Add();
-            oWord.Visible = true;
         }
 
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void label5_Click(object sender, EventArgs e)
         {
         }
 
-        private void openFileDialog1_FileOk(object sender, EventArgs e)
+        private void label6_Click(object sender, EventArgs e)
         {
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void CardList_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
 
-        private void saveFileDialog1_FileOk(object sender, EventArgs e)
+        private void FileBrowser_FileOk(object sender, EventArgs e)
+        {
+        }
+
+        private void FileSelectedLabel_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void FileSaver_FileOk(object sender, EventArgs e)
         {
         }
 
@@ -119,26 +167,12 @@ namespace _2Constructor
         private void Form1_Load(object sender, EventArgs e)
         {
         }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        { 
-            _headFontSize = Convert.ToInt32(numericUpDown1.Value);
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-        }
     }
+
 
     internal class Card
     {
-        public int position { get; set; }
+        public int position { get; set; } //tf does this variable mean
         public Word.Range range { get; set; }
-
-
     }
 }
